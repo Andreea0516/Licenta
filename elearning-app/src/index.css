@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.code-container {
+  display: flex; /* Stabilește acest container ca un container flex */
+  flex-direction: column; /* Așază liniile de cod într-o coloană */
+  background-color: #000000;
+  color: #496fb6;
+  font-family: 'Courier New', monospace;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 20px;
+  overflow-y: auto;
+}
+
+.code-block {
+  background-color: #6116b68a; 
+  color: #abb2bf; 
+  font-family: 'Courier New', Courier, monospace;
+  padding: 10px; 
+  margin: 2px 0; 
+  border-radius: 5px; 
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); 
+  width: fit-content; 
+  max-width: 100%; 
+  display: block;
+}
+

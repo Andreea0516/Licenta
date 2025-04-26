@@ -1,0 +1,31 @@
+.main-container {
+    text-align: center; /* Centrează conținutul */
+  }
+  
+  .welcome-message {
+    margin: 20px 0;
+    font-size: 24px;
+  }
+  
+  .cards-container {
+    display: flex;
+    justify-content: center; 
+    gap: 20px; 
+  }
+  
+  .card {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: scale(1.1); /* Efect de zoom la hover */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  
