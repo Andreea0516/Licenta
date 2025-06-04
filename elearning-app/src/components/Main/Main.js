@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Main.css'; 
+import './Main.css';
+import bgImage from '../../assets/background.png';
 
 function Main() {
   const navigate = useNavigate();
@@ -10,17 +11,29 @@ function Main() {
   };
 
   return (
-    <div className="main-container">
-      <h2 className="welcome-message">Welcome!</h2>
+    <div
+      className="main-container"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
+      <h1 className="main-title">Pick a subject to learn:</h1>
       <div className="cards-container">
-        <div className="card" onClick={() => handleNavigate('/java')}>
+        <div className="soft-card" onClick={() => handleNavigate('/java')}>
           Java
         </div>
-        <div className="card" onClick={() => handleNavigate('/css')}>
-          CSS
+        <div className="soft-card" onClick={() => handleNavigate('/python')}>
+          Python
         </div>
-        <div className="card" onClick={() => handleNavigate('/html')}>
+        <div className="soft-card" onClick={() => handleNavigate('/js')}>
+          JavaScript
+        </div>
+        <div className="soft-card" onClick={() => handleNavigate('/html')}>
           HTML
+        </div>
+        <div className="soft-card" onClick={() => handleNavigate('/SQL')}>
+          SQL
+        </div>
+        <div className="soft-card" onClick={() => handleNavigate('/cpp')}>
+          C++
         </div>
       </div>
     </div>

@@ -1,49 +1,45 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Login.css';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  const handleLogin = async (event) => {
+  const handleLogin = (event) => {
     event.preventDefault();
-    const response = await fetch('http://localhost:5000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    });
 
-    const data = await response.json();
-    if (data.success) {
+    if (username === 'admin' && password === 'admin') {
       alert('Login successful!');
-      navigate('/main'); 
+      navigate('/main');
     } else {
       alert('Login failed!');
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <label>
-          Username:
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </label>
-        <br />
-        <button type="submit">Login</button>
+    <div className="login-container">
+      <form className="login-form" onSubmit={handleLogin}>
+        <h2>Login</h2>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
 }
 
 export default Login;
-
