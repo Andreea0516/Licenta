@@ -1,0 +1,53 @@
+.register-container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('../../assets/fundal2.PNG');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-form {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 50px;
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-form h2 {
+  color: white;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.register-form input {
+  margin: 10px 0;
+  padding: 12px;
+  width: 280px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+}
+
+.register-form button {
+  margin-top: 20px;
+  padding: 12px 28px;
+  font-size: 1rem;
+  background-color: #ff7bc0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.register-form button:hover {
+  background-color: #ff4fa2;
+}

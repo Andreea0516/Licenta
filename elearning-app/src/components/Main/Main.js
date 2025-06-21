@@ -18,11 +18,11 @@ function Main() {
       <div className="top-nav">
         <div className="nav-logo">DevPaws</div>
         <button className="nav-button" onClick={() => handleNavigate('/login')}>
-          Login
+          Autentificare
         </button>
       </div>
 
-      <h1 className="main-title">Pick a subject to learn:</h1>
+      <h1 className="main-title">Alege un limbaj de programare:</h1>
 
       <div className="cards-container">
         <div className="soft-card" onClick={() => handleNavigate('/java')}>Java</div>

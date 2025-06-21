@@ -10,6 +10,8 @@ import JSPage from './components/lgCard/JSPage';
 import HTMLPage from './components/lgCard/HTMLPage';
 import SQLPage from './components/lgCard/SQLPage';
 import CppPage from './components/lgCard/CppPage';
+import Register from './components/Register/Register';
+import ResetPassword from './components/Login/ResetPassword';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route path="/html" element={<HTMLPage />} />
         <Route path="/SQL" element={<SQLPage />} />
         <Route path="/cpp" element={<CppPage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/reset" element={<ResetPassword />} /> 
       </Routes>
     </BrowserRouter>
   );

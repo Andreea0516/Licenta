@@ -33,6 +33,24 @@
   font-size: 1rem;
 }
 
+.login-links {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.login-link {
+  color: #ffffff;
+  margin-top: 10px;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.login-link:hover {
+  color: #ff7bc0;
+}
+
+
 .login-form button {
   margin-top: 20px;
   padding: 14px 28px;
@@ -48,3 +66,5 @@
 .login-form button:hover {
   background-color: #ff4fa2;
 }
+
+

@@ -36,7 +36,13 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Submit</button>
+        <button type="submit">Autentificare</button>
+
+        {/* Linkuri suplimentare */}
+        <div className="login-links">
+          <p onClick={() => navigate('/reset')} className="login-link">Ai uitat parola?</p>
+          <p onClick={() => navigate('/register')} className="login-link">Nu ai cont? Înregistrează-te aici</p>
+        </div>
       </form>
     </div>
   );
