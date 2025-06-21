@@ -15,26 +15,22 @@ function Main() {
       className="main-container"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
+      <div className="top-nav">
+        <div className="nav-logo">DevPaws</div>
+        <button className="nav-button" onClick={() => handleNavigate('/login')}>
+          Login
+        </button>
+      </div>
+
       <h1 className="main-title">Pick a subject to learn:</h1>
+
       <div className="cards-container">
-        <div className="soft-card" onClick={() => handleNavigate('/java')}>
-          Java
-        </div>
-        <div className="soft-card" onClick={() => handleNavigate('/python')}>
-          Python
-        </div>
-        <div className="soft-card" onClick={() => handleNavigate('/js')}>
-          JavaScript
-        </div>
-        <div className="soft-card" onClick={() => handleNavigate('/html')}>
-          HTML
-        </div>
-        <div className="soft-card" onClick={() => handleNavigate('/SQL')}>
-          SQL
-        </div>
-        <div className="soft-card" onClick={() => handleNavigate('/cpp')}>
-          C++
-        </div>
+        <div className="soft-card" onClick={() => handleNavigate('/java')}>Java</div>
+        <div className="soft-card" onClick={() => handleNavigate('/python')}>Python</div>
+        <div className="soft-card" onClick={() => handleNavigate('/js')}>JavaScript</div>
+        <div className="soft-card" onClick={() => handleNavigate('/html')}>HTML</div>
+        <div className="soft-card" onClick={() => handleNavigate('/SQL')}>SQL</div>
+        <div className="soft-card" onClick={() => handleNavigate('/cpp')}>C++</div>
       </div>
     </div>
   );

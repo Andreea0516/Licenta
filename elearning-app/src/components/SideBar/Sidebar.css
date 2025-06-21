@@ -1,9 +1,8 @@
 .sidebar {
   height: 100vh;
-  background-color: #2e2e3a;
-  padding: 20px 10px;
-  box-sizing: border-box;
+  background-color: rgba(30, 30, 40, 0.95);
   color: white;
+  padding: 20px 10px;
   position: fixed;
   top: 0;
   left: 0;
@@ -57,3 +56,5 @@
 .sidebar-link:hover {
   color: #ff7bc0;
 }
+
+

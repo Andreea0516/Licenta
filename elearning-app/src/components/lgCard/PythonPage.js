@@ -4,6 +4,8 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import shuffle from 'lodash.shuffle';
 import snippets from './content/codeSnippetsPython.js';
 import '../../styles/PythonPage.css';
+import Sidebar from '../SideBar/Sidebar';
+import backgroundImage from '../../assets/background1.png'; 
 
 const CodeLine = ({ text, index, moveLine, isLocked, status }) => {
   const [{ isDragging }, drag, preview] = useDrag(() => ({
@@ -103,30 +105,44 @@ const PythonPage = ({ selectedSnippetId = 1 }) => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="python-page">
-        {isLocked && (
-          <div className="timer">Memorează codul: {viewTime} secunde</div>
-        )}
-        <div className="code-container">
-          {codeLines.map((line, index) => (
-            <CodeLine
-              key={index + line}
-              index={index}
-              text={line}
-              moveLine={moveLine}
-              isLocked={isLocked}
-              status={lineStatus[index] || ''}
-            />
-          ))}
+      <div
+        className="page-wrapper"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          minHeight: '100vh',
+        }}
+      >
+        <div className="layout">
+          <Sidebar />
+          <main className="main-area">
+            {isLocked && (
+              <div className="timer">Memorează codul: {viewTime} secunde</div>
+            )}
+            <div className="code-container">
+              {codeLines.map((line, index) => (
+                <CodeLine
+                  key={index + line}
+                  index={index}
+                  text={line}
+                  moveLine={moveLine}
+                  isLocked={isLocked}
+                  status={lineStatus[index] || ''}
+                />
+              ))}
+            </div>
+            <button
+              onClick={handleSubmit}
+              className="submit-button"
+              disabled={isLocked}
+            >
+              Submit
+            </button>
+            {result && <div className="result-message">{result}</div>}
+          </main>
         </div>
-        <button
-          onClick={handleSubmit}
-          className="submit-button"
-          disabled={isLocked}
-        >
-          Submit
-        </button>
-        {result && <div className="result-message">{result}</div>}
       </div>
     </DndProvider>
   );
