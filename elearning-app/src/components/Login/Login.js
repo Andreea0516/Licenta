@@ -5,16 +5,17 @@ import './Login.css';
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = (event) => {
     event.preventDefault();
 
     if (username === 'admin' && password === 'admin') {
-      alert('Login successful!');
+      setLoginError('');
       navigate('/main');
     } else {
-      alert('Login failed!');
+      setLoginError('Date incorecte. Încearcă din nou.');
     }
   };
 
@@ -38,7 +39,10 @@ function Login() {
         />
         <button type="submit">Autentificare</button>
 
-        {/* Linkuri suplimentare */}
+        {loginError && (
+          <p style={{ color: 'red', marginTop: '10px' }}>{loginError}</p>
+        )}
+
         <div className="login-links">
           <p onClick={() => navigate('/reset')} className="login-link">Ai uitat parola?</p>
           <p onClick={() => navigate('/register')} className="login-link">Nu ai cont? Înregistrează-te aici</p>

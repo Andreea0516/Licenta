@@ -7,9 +7,9 @@ function ResetPassword() {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
-  const navigate = useNavigate();
-
+  const [resetMessage, setResetMessage] = useState('');
   const confirmPasswordRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleReset = (event) => {
     event.preventDefault();
@@ -22,13 +22,8 @@ function ResetPassword() {
       confirmPasswordRef.current.setCustomValidity('');
     }
 
-    // Simulează resetarea parolei
-    console.log('Resetare pentru:', email);
-    console.log('Parolă veche:', oldPassword);
-    console.log('Nouă parolă:', newPassword);
-
-    alert('Parolă resetată cu succes (simulat).');
-    navigate('/');
+    setResetMessage('Parolă resetată cu succes!');
+    setTimeout(() => navigate('/'), 1500);
   };
 
   return (
@@ -36,30 +31,9 @@ function ResetPassword() {
       <form className="login-form" onSubmit={handleReset}>
         <h2>Resetare parolă</h2>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-
-        <input
-          type="password"
-          placeholder="Parola veche"
-          value={oldPassword}
-          onChange={(e) => setOldPassword(e.target.value)}
-          required
-        />
-
-        <input
-          type="password"
-          placeholder="Parolă nouă"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          required
-        />
-
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <input type="password" placeholder="Parola veche" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} required />
+        <input type="password" placeholder="Parolă nouă" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
         <input
           type="password"
           placeholder="Confirmă parola nouă"
@@ -70,10 +44,9 @@ function ResetPassword() {
         />
 
         <button type="submit">Resetează parola</button>
+        {resetMessage && <p style={{ color: 'green', marginTop: '10px' }}>{resetMessage}</p>}
 
-        <p onClick={() => navigate('/')} className="login-link">
-          Înapoi la login
-        </p>
+        <p onClick={() => navigate('/')} className="login-link">Înapoi la login</p>
       </form>
     </div>
   );

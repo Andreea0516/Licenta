@@ -88,7 +88,7 @@ const HTMLPage = ({ selectedSnippetId = 1 }) => {
     setLineStatus(status);
 
     const isCorrect = status.every((s) => s === 'correct');
-    setResult(isCorrect ? 'CONGRATULATIONS! ✅' : 'TRY AGAIN! ❌');
+    setResult(isCorrect ? 'FELICITARI! ✅' : 'INCEARCA DIN NOU! ❌');
 
     if (isCorrect) {
       setTimeout(() => {

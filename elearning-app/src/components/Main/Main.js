@@ -18,7 +18,7 @@ function Main() {
       <div className="top-nav">
         <div className="nav-logo">DevPaws</div>
         <button className="nav-button" onClick={() => handleNavigate('/login')}>
-          Autentificare
+          Delogare
         </button>
       </div>
 
