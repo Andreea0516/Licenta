@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Login from './components/Login/Login';
 import Main from './components/Main/Main';
+import Profile from './components/Profile/Profile';
+import EditProfile from './components/Profile/EditProfile';
 
 import JavaPage from './components/lgCard/JavaPage';
 import PythonPage from './components/lgCard/PythonPage';
@@ -28,6 +30,8 @@ function App() {
         <Route path="/cpp" element={<CppPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/reset" element={<ResetPassword />} /> 
+        <Route path="/profile" element={<Profile />} /> 
+         <Route path="/profile/edit"element={<EditProfile />} />
       </Routes>
     </BrowserRouter>
   );
