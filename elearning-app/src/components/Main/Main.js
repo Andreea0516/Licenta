@@ -17,11 +17,23 @@ function Main() {
     >
       <div className="top-nav">
         <div className="nav-logo">DevPaws</div>
-        <button className="nav-button" onClick={() => handleNavigate('/login')}>
-          Delogare
-        </button>
+        <div className="nav-buttons">
+          <button
+            id="profile-btn"
+            className="nav-button"
+            onClick={() => handleNavigate('/profile')}
+          >
+            Profil
+          </button>
+          <button
+            id="logout-btn"
+            className="nav-button"
+            onClick={() => handleNavigate('/login')}
+          >
+            Delogare
+          </button>
+        </div>
       </div>
-
       <h1 className="main-title">Alege un limbaj de programare:</h1>
 
       <div className="cards-container">
