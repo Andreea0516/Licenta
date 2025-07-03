@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import { resetPassword } from '../../api/users';
 
 function ResetPassword() {
   const [email, setEmail] = useState('');
@@ -8,10 +9,11 @@ function ResetPassword() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [resetMessage, setResetMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const confirmPasswordRef = useRef(null);
   const navigate = useNavigate();
 
-  const handleReset = (event) => {
+  const handleReset = async (event) => {
     event.preventDefault();
 
     if (newPassword !== confirmNewPassword) {
@@ -22,18 +24,43 @@ function ResetPassword() {
       confirmPasswordRef.current.setCustomValidity('');
     }
 
-    setResetMessage('Parolă resetată cu succes!');
-    setTimeout(() => navigate('/'), 1500);
+    try {
+      await resetPassword({ email, oldPassword, newPassword });
+      setResetMessage('Parolă resetată cu succes!');
+      setErrorMessage('');
+      setTimeout(() => navigate('/'), 1500);
+    } catch (err) {
+      const backendMessage = err?.response?.data?.message || 'Eroare necunoscută.';
+      setResetMessage('');
+      setErrorMessage(`Eroare: ${backendMessage}`);
+    }
   };
 
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleReset}>
         <h2>Resetare parolă</h2>
-
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Parola veche" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} required />
-        <input type="password" placeholder="Parolă nouă" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Parola veche"
+          value={oldPassword}
+          onChange={(e) => setOldPassword(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Parolă nouă"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+          required
+        />
         <input
           type="password"
           placeholder="Confirmă parola nouă"
@@ -44,7 +71,9 @@ function ResetPassword() {
         />
 
         <button type="submit">Resetează parola</button>
+
         {resetMessage && <p style={{ color: 'green', marginTop: '10px' }}>{resetMessage}</p>}
+        {errorMessage && <p style={{ color: 'red', marginTop: '10px' }}>{errorMessage}</p>}
 
         <p onClick={() => navigate('/')} className="login-link">Înapoi la login</p>
       </form>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Login.css';
+import '../Login/Login.css';
+import { loginUser } from '../../api/users';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -8,13 +9,18 @@ function Login() {
   const [loginError, setLoginError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = (event) => {
-    event.preventDefault();
-
-    if (username === 'admin' && password === 'admin') {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await loginUser({ username, password });
+      localStorage.setItem('userId', data.user.id); 
+      localStorage.setItem('profileData', JSON.stringify({
+        username: data.user.username,
+        email: data.user.email
+      }));
       setLoginError('');
       navigate('/main');
-    } else {
+    } catch (err) {
       setLoginError('Date incorecte. Încearcă din nou.');
     }
   };
@@ -23,26 +29,10 @@ function Login() {
     <div className="login-container">
       <form className="login-form" onSubmit={handleLogin}>
         <h2>Login</h2>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
+        <input type="password" placeholder="Parolă" value={password} onChange={(e) => setPassword(e.target.value)} required />
         <button type="submit">Autentificare</button>
-
-        {loginError && (
-          <p style={{ color: 'red', marginTop: '10px' }}>{loginError}</p>
-        )}
-
+        {loginError && <p style={{ color: 'red', marginTop: '10px' }}>{loginError}</p>}
         <div className="login-links">
           <p onClick={() => navigate('/reset')} className="login-link">Ai uitat parola?</p>
           <p onClick={() => navigate('/register')} className="login-link">Nu ai cont? Înregistrează-te aici</p>

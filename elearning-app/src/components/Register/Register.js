@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css';
 import backgroundImg from '../../assets/fundal2.PNG';
+import { registerUser } from '../../api/users';
 
 function Register() {
   const [firstName, setFirstName] = useState('');
@@ -11,30 +12,42 @@ function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [registerMessage, setRegisterMessage] = useState('');
+  const [registerError, setRegisterError] = useState('');
+  const confirmPasswordRef = useRef(null);
   const navigate = useNavigate();
 
-  const confirmPasswordRef = useRef(null);
-
-  const handleRegister = (event) => {
+  const handleRegister = async (event) => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
-      confirmPasswordRef.current.setCustomValidity("Parola nu coincide!");
+      confirmPasswordRef.current.setCustomValidity("Parolele nu coincid!");
       confirmPasswordRef.current.reportValidity();
       return;
     } else {
       confirmPasswordRef.current.setCustomValidity('');
     }
 
-    setRegisterMessage('Înregistrare cu succes!');
-    setTimeout(() => navigate('/login'), 1500);
+    const newUser = {
+      firstName,
+      lastName,
+      username,
+      email,
+      password
+    };
+
+    try {
+      await registerUser(newUser);
+      setRegisterMessage('Înregistrare reușită!');
+      setRegisterError('');
+      setTimeout(() => navigate('/login'), 2000);
+    } catch (err) {
+      setRegisterError('Eroare la înregistrare. Verifică dacă utilizatorul sau emailul există deja.');
+      setRegisterMessage('');
+    }
   };
 
   return (
-    <div
-      className="register-container"
-      style={{ backgroundImage: `url(${backgroundImg})` }}
-    >
+    <div className="register-container" style={{ backgroundImage: `url(${backgroundImg})` }}>
       <form className="register-form" onSubmit={handleRegister}>
         <h2>Înregistrare</h2>
 
@@ -53,11 +66,10 @@ function Register() {
         />
 
         <button type="submit">Înregistrează-te</button>
-        {registerMessage && <p style={{ color: 'green', marginTop: '10px' }}>{registerMessage}</p>}
+        {registerMessage && <p style={{ color: 'green' }}>{registerMessage}</p>}
+        {registerError && <p style={{ color: 'red' }}>{registerError}</p>}
 
-        <p onClick={() => navigate('/login')} className="login-link">
-          Ai deja cont? Login
-        </p>
+        <p onClick={() => navigate('/login')} className="login-link">Ai deja cont? Login</p>
       </form>
     </div>
   );

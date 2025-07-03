@@ -1,45 +1,36 @@
 const router = require("express").Router();
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
 
 router.post("/register", async (req, res) => {
   try {
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
     const newUser = new User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       username: req.body.username,
       email: req.body.email,
-      password: hashedPassword,
+      password: req.body.password,
     });
 
     const savedUser = await newUser.save();
-    res.status(200).json(savedUser);
+    res.status(201).json(savedUser);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: "Eroare la înregistrare", error: err });
   }
 });
 
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username });
-    if (!user) return res.status(400).json("Username incorect!");
+    if (!user) return res.status(400).json({ message: "Utilizator inexistent" });
 
-    const isPasswordValid = await bcrypt.compare(req.body.password, user.password);
-    if (!isPasswordValid) return res.status(400).json("Parolă incorectă!");
+    if (user.password !== req.body.password) {
+      return res.status(400).json({ message: "Parolă greșită" });
+    }
 
-    res.status(200).json({
-      message: "Autentificare reușită!",
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-      },
-    });
+    const { password, ...userData } = user._doc;
+    res.status(200).json(userData);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: "Eroare la login", error: err });
   }
 });
 
