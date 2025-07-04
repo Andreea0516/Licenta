@@ -24,12 +24,14 @@ router.put("/:id", async (req, res) => {
 router.put("/reset-password", async (req, res) => {
   const { email, oldPassword, newPassword } = req.body;
 
+  console.log("Cerere resetare parolă:", req.body);
+
   try {
     const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: "Utilizatorul nu a fost găsit" });
+    if (!user) return res.status(404).json({ message: "Utilizator inexistent" });
 
     if (user.password !== oldPassword) {
-      return res.status(400).json({ message: "Parola veche este incorectă" });
+      return res.status(400).json({ message: "Parola veche este greșită" });
     }
 
     user.password = newPassword;
@@ -37,7 +39,7 @@ router.put("/reset-password", async (req, res) => {
 
     res.status(200).json({ message: "Parolă actualizată cu succes" });
   } catch (err) {
-    res.status(500).json({ message: "Eroare server", error: err.message });
+    res.status(500).json({ message: "Eroare la resetare", error: err.message });
   }
 });
 
